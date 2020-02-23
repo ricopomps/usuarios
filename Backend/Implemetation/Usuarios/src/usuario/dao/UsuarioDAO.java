@@ -17,11 +17,10 @@ public class UsuarioDAO {
 	private String jdbcPassword;
 	private Connection jdbcConnection;
 
-	public UsuarioDAO(String jdbcURL, String jdbcUsername, String jdbcPassword, Connection jdbcConnection) {
+	public UsuarioDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
 		this.jdbcURL = jdbcURL;
 		this.jdbcUsername = jdbcUsername;
 		this.jdbcPassword = jdbcPassword;
-		this.jdbcConnection = jdbcConnection;
 	}
 
 	protected void connect() throws SQLException {
