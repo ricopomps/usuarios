@@ -26,11 +26,15 @@ public class UsuarioDAO {
 	protected void connect() throws SQLException {
 		if (jdbcConnection == null || jdbcConnection.isClosed()) {
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
+				Class.forName("com.mysql.cj.jdbc.Driver");
 			} catch (ClassNotFoundException e) {
 				throw new SQLException(e);
+			} catch (Exception e) {
+				throw new SQLException(e);
 			}
-			jdbcConnection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+			jdbcConnection = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/db_usuarios?useTimezone=true&serverTimezone=America/Sao_Paulo&useSSL=false",
+					"root", "12345678");
 		}
 	}
 
@@ -71,8 +75,8 @@ public class UsuarioDAO {
 			String nome = resultSet.getString("nome");
 			String email = resultSet.getString("email");
 //			String senha = resultSet.getString("senha");
-			// Showing the password would result in a security flaw, hence the list will
-			// return all passwords as null
+			// Showing the password would result in a security flaw, hence the list wont
+			// return any passwords
 
 			Usuario usuario = new Usuario();
 			usuario.setId(id);
@@ -92,7 +96,7 @@ public class UsuarioDAO {
 	}
 
 	public boolean deleteUsuario(Usuario usuario) throws SQLException {
-		String sql = "DELETE FROM usuarios WHERE usuarios_id = ?";
+		String sql = "DELETE FROM usuarios WHERE id = ?";
 
 		connect();
 
@@ -123,7 +127,7 @@ public class UsuarioDAO {
 
 	public Usuario getUsuario(int id) throws SQLException {
 		Usuario usuario = null;
-		String sql = "SELECT * FROM usuario WHERE id = ?";
+		String sql = "SELECT * FROM usuarios WHERE id = ?";
 		connect();
 		PreparedStatement statement = jdbcConnection.prepareStatement(sql);
 		statement.setInt(1, id);
@@ -135,6 +139,7 @@ public class UsuarioDAO {
 			String senha = resultSet.getString("senha");
 
 			usuario = new Usuario();
+			usuario.setId(id);
 			usuario.setNome(nome);
 			usuario.setEmail(email);
 			usuario.setSenha(senha);

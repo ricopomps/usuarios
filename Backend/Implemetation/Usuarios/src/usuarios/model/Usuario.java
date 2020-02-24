@@ -1,6 +1,5 @@
 package usuarios.model;
 
-
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,29 +9,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
 public class Usuario {
-
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
-	
-	@Column(name="nome")
+
+	@Column(name = "nome")
 	private String nome;
-	
-	@Column(name="email")
+
+	@Column(name = "email")
 	private String email;
-	
-	@Column(name="senha")
+
+	@Column(name = "senha")
 	private String senha;
-	
-	
+
 	private List<Telefone> telefones;
-	
-	public Usuario() { 
-		
+
+	public Usuario() {
+
 	}
 
 	public int getId() {
@@ -74,6 +70,5 @@ public class Usuario {
 	public void setTelefones(List<Telefone> telefones) {
 		this.telefones = telefones;
 	}
-	
-	
+
 }

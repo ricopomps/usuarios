@@ -9,35 +9,32 @@
 	<center>
 		<h1>Gerenciador de usuarios</h1>
 		<h2>
-			<a href="/Usuarios/new">Adicione um novo usuario</a>
-			&nbsp;&nbsp;&nbsp; <a href="/Usuarios/list">Liste todos os
-				usuarios</a>
+			<a href="/Usuarios/new">Adicione um novo usuario</a> &nbsp;&nbsp;&nbsp; <a
+				href="/Usuarios/list">Liste todos os usuarios</a>
 
 		</h2>
 	</center>
 	<div align="center">
-		<c:if test="${usuario != null}">
 			<form action="update" method="post">
-		</c:if>
-		<c:if test="${usuario == null}">
-			<form action="insert" method="post">
-		</c:if>
 		<table border="1" cellpadding="5">
 			<caption>
 				<h2>
-					<c:if test="${usuario != null}">
-                        Editar usuario
-                    </c:if>
-					<c:if test="${usuario == null}">
-                        Adicionar novo usuario
-                    </c:if>
+                        Editar usuario        					
 				</h2>
 			</caption>
-			<c:if test="${usuario != null}">
-			<input id="id" name="id" type="hidden" value='${usuario.id}'>
-				<input type="hidden" name="id"
-					value="<c:out value='${usuario.id}' />" />
-			</c:if>
+			<input id="id" name="id" type="hidden" value='${usuario.nome}'>
+				<input type="text" name="id"
+					value='${usuario.id}'  />
+					
+					<input id="id" name="id" type="text" value='${usuario.id}'>
+					<input id="id" name="id" type="text" value='${usuario.nome}'>
+					<input id="id" name="id" type="text" value='${usuario.email}'>
+					<input id="id" name="id" type="text" value='${usuario.senha}'>
+			<tr>
+				<th>id:</th>
+				<td><input type="text" name="id" size="45"
+					value="<c:out value='${usuario.id}' />" /></td>
+			</tr>
 			<tr>
 				<th>Nome:</th>
 				<td><input type="text" name="nome" size="45"
@@ -53,9 +50,10 @@
 				<td><input type="text" name="senha" size="45"
 					value="<c:out value='${usuario.senha}' />" /></td>
 			</tr>
+			<h2><a href="/Usuarios/update?id=1">Edit</a></h2>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"
-					value="Salvar" /></td>
+					value="Save" /></td>
 			</tr>
 		</table>
 		</form>

@@ -19,9 +19,10 @@ public class UsuarioControllerServlet extends HttpServlet {
 	private UsuarioDAO usuarioDAO;
 
 	public void init() {
-		String jdbcURL = getServletContext().getInitParameter("jdbcURL");
-		String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
-		String jdbcPassword = getServletContext().getInitParameter("jdbcPassword");
+		String jdbcURL = getServletContext().getInitParameter(
+				"jdbc:mysql://localhost:3306/db_usuarios?useTimezone=true&serverTimezone=America/Sao_Paulo&useSSL=false");
+		String jdbcUsername = getServletContext().getInitParameter("root");
+		String jdbcPassword = getServletContext().getInitParameter("12345678");
 
 		usuarioDAO = new UsuarioDAO(jdbcURL, jdbcUsername, jdbcPassword);
 	}
@@ -67,7 +68,7 @@ public class UsuarioControllerServlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 		List<Usuario> listaUsuario = usuarioDAO.listAllUsuarios();
 		request.setAttribute("listaUsuario", listaUsuario);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("UsuarioForm.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("ListaDeUsuario.jsp");
 		dispatcher.forward(request, response);
 
 	}
@@ -80,6 +81,8 @@ public class UsuarioControllerServlet extends HttpServlet {
 
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+		// int id = Integer.parseInt(request.getParameter("id"));
+//		int id = (Integer) request.getAttribute("id");
 		int id = Integer.parseInt(request.getParameter("id"));
 		Usuario existingUsuario = usuarioDAO.getUsuario(id);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("UsuarioForm.jsp");
