@@ -76,6 +76,12 @@ public class UsuarioControllerServlet extends HttpServlet {
 			case "/searchTelefone":
 				listTelefonesFromUsuario(request, response);
 				break;
+			case "/login":
+				login(request, response);
+				break;
+			case "/loginExecute":
+				loginExecute(request, response);
+				break;
 			default:
 				listUsuarios(request, response);
 				break;
@@ -112,6 +118,32 @@ public class UsuarioControllerServlet extends HttpServlet {
 		request.setAttribute("listaTelefone", listaTelefone);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("ListaTelefone.jsp");
 		dispatcher.forward(request, response);
+	}
+
+	private void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Login.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void loginExecute(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		String nome = request.getParameter("nome");
+		String email = request.getParameter("email");
+		String senha = request.getParameter("senha");
+		Usuario usuario = usuarioDAO.getUsuario(nome, email, senha);
+		if (usuario != null) {
+			if (usuario.getNome().equals(nome) && usuario.getEmail().equals(email)
+					&& usuario.getSenha().equals(senha)) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("LoginComSucesso.jsp");
+				dispatcher.forward(request, response);
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("LoginComFracasso.jsp");
+				dispatcher.forward(request, response);
+			}
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("LoginComFracasso.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
@@ -190,16 +222,16 @@ public class UsuarioControllerServlet extends HttpServlet {
 	private void updateTelefone(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		String ddd = request.getParameter("ddd");
+		int ddd = Integer.parseInt(request.getParameter("ddd"));
 		String numero = request.getParameter("numero");
 		String tipo = request.getParameter("tipo");
-		String id_usuario = request.getParameter("id_usuario");
+		int id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
 		Telefone telefone = new Telefone();
 		telefone.setId(id);
-		telefone.setDdd(Integer.parseInt(ddd));
+		telefone.setDdd(ddd);
 		telefone.setNumero(numero);
 		telefone.setTipo(tipo);
-		telefone.setId_usuario(Integer.parseInt(id_usuario));
+		telefone.setId_usuario(id_usuario);
 		telefoneDAO.updateTelefone(telefone);
 		response.sendRedirect("list");
 	}

@@ -17,27 +17,15 @@
 		</h2>
 	</center>
 	<div align="center">
-		<c:if test="${usuario != null}">
-			<form action="update" method="post">
-		</c:if>
-		<c:if test="${usuario == null}">
-			<form action="insert" method="post">
-		</c:if>
+		
+			<form action="loginExecute" method="post">
+		
+		
 		<table border="1" cellpadding="5">
 			<caption>
-				<h2>
-					<c:if test="${usuario != null}">
-                        Editar usuario
-                    </c:if>
-					<c:if test="${usuario == null}">
-                        Adicionar novo usuario
-                    </c:if>
-				</h2>
+				<h2>LOGIN COM SUCESSO!!</h2>
 			</caption>
-			<c:if test="${usuario != null}">
-				<input type="hidden" name="id"
-					value="<c:out value='${usuario.id}' />" />
-			</c:if>
+			
 			<tr>
 				<th>Nome:</th>
 				<td><input type="text" name="nome" size="45"
@@ -55,7 +43,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"
-					value="Salvar" /></td>
+					value="Login" /></td>
 			</tr>
 		</table>
 		</form>

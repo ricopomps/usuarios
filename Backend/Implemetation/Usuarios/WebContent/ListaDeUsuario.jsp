@@ -13,7 +13,7 @@
 			&nbsp;&nbsp;&nbsp;<a href="/Usuarios/newTelefone">Adicione um
 				novo telefone</a> &nbsp;&nbsp;&nbsp;<a href="/Usuarios/list">Liste
 				todos os usuarios</a>&nbsp;&nbsp;&nbsp; <a
-				href="/Usuarios/listTelefones">Lista de telefones</a>
+				href="/Usuarios/listTelefones">Lista de telefones</a>&nbsp;&nbsp;&nbsp;<a href="/Usuarios/login"> Login </a>
 			
 		</h2>
 	</center>

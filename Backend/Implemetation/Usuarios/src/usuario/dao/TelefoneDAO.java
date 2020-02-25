@@ -179,6 +179,7 @@ public class TelefoneDAO {
 			int id_usuario = resultSet.getInt("id_usuario");
 
 			telefone = new Telefone();
+			telefone.setId(id);
 			telefone.setDdd(ddd);
 			telefone.setNumero(numero);
 			telefone.setTipo(tipo);
