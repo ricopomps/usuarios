@@ -9,9 +9,12 @@
 	<center>
 		<h1>Gerenciador de usuarios</h1>
 		<h2>
-			<a href="/Usuarios/new">Adicione um novo usuario</a> &nbsp;&nbsp;&nbsp; <a
-				href="/Usuarios/list">Liste todos os usuarios</a>
-
+			<a href="/Usuarios/new">Adicione um novo usuario</a>
+			&nbsp;&nbsp;&nbsp;<a href="/Usuarios/newTelefone">Adicione um
+				novo telefone</a> &nbsp;&nbsp;&nbsp;<a href="/Usuarios/list">Liste
+				todos os usuarios</a>&nbsp;&nbsp;&nbsp; <a
+				href="/Usuarios/listTelefones">Lista de telefones</a>
+			
 		</h2>
 	</center>
 	<div align="center">
@@ -23,15 +26,22 @@
 				<th>ID</th>
 				<th>Nome</th>
 				<th>Email</th>
+				<th>Ações</th>
 			</tr>
 			<c:forEach var="usuario" items="${listaUsuario}">
 				<tr>
 					<td><c:out value="${usuario.id}" /></td>
 					<td><c:out value="${usuario.nome}" /></td>
 					<td><c:out value="${usuario.email}" /></td>
-					<td><a href="/Usuarios/edit?id=<c:out value='${usuario.id}' />">Edit</a>
+					<td><a
+						href="/Usuarios/edit?id=<c:out value='${usuario.id}' />">Edit</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; <a
-						href="/Usuarios/delete?id=<c:out value='${usuario.id}' />">Delete</a></td>
+						href="/Usuarios/delete?id=<c:out value='${usuario.id}' />">Delete</a>
+						&nbsp;&nbsp;&nbsp;&nbsp; <a
+						href="/Usuarios/searchTelefone?id=<c:out value='${usuario.id}' />">Telefones</a></td>
+
+
+
 				</tr>
 			</c:forEach>
 		</table>

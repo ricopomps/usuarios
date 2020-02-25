@@ -27,11 +27,13 @@ public class TelefoneDAO {
 	protected void connect() throws SQLException {
 		if (jdbcConnection == null || jdbcConnection.isClosed()) {
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
+				Class.forName("com.mysql.cj.jdbc.Driver");
 			} catch (ClassNotFoundException e) {
 				throw new SQLException(e);
 			}
-			jdbcConnection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+			jdbcConnection = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/db_usuarios?useTimezone=true&serverTimezone=America/Sao_Paulo&useSSL=false",
+					"root", "12345678");
 		}
 	}
 
@@ -94,8 +96,43 @@ public class TelefoneDAO {
 
 	}
 
+	public List<Telefone> listAllTelefones(int id) throws SQLException {
+		List<Telefone> listaTelefones = new ArrayList<>();
+
+		String sql = "SELECT * FROM telefones WHERE id_usuario = " + id;
+
+		connect();
+
+		Statement statement = jdbcConnection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		while (resultSet.next()) {
+			int id1 = resultSet.getInt("id");
+			int ddd = resultSet.getInt("ddd");
+			String numero = resultSet.getString("numero");
+			String tipo = resultSet.getString("tipo");
+			int id_usuario = resultSet.getInt("id_usuario");
+
+			Telefone telefone = new Telefone();
+			telefone.setId(id1);
+			telefone.setDdd(ddd);
+			telefone.setNumero(numero);
+			telefone.setTipo(tipo);
+			telefone.setId_usuario(id_usuario);
+
+			listaTelefones.add(telefone);
+
+		}
+		resultSet.close();
+		statement.close();
+
+		disconnect();
+
+		return listaTelefones;
+	}
+
 	public boolean deleteTelefone(Telefone telefone) throws SQLException {
-		String sql = "DELETE FROM telefones WHERE usuarios_id = ?";
+		String sql = "DELETE FROM telefones WHERE id = ?";
 
 		connect();
 

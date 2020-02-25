@@ -10,9 +10,10 @@
 		<h1>Gerenciador de usuarios</h1>
 		<h2>
 			<a href="/Usuarios/new">Adicione um novo usuario</a>
-			&nbsp;&nbsp;&nbsp; <a href="/Usuarios/list">Liste todos os
-				usuarios</a>
-
+			&nbsp;&nbsp;&nbsp;<a href="/Usuarios/newTelefone">Adicione um
+				novo telefone</a> &nbsp;&nbsp;&nbsp;<a href="/Usuarios/list">Liste
+				todos os usuarios</a>&nbsp;&nbsp;&nbsp; <a
+				href="/Usuarios/listTelefones">Lista de telefones</a>
 		</h2>
 	</center>
 	<div align="center">

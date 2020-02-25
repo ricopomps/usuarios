@@ -9,17 +9,20 @@
 	<center>
 		<h1>Gerenciador de telefones</h1>
 		<h2>
-			<a href="/new">Adicione um novo telefone</a> &nbsp;&nbsp;&nbsp; <a
-				href="/list">Liste todos os telefones</a>
+				<a href="/Usuarios/new">Adicione um novo usuario</a>
+			&nbsp;&nbsp;&nbsp;<a href="/Usuarios/newTelefone">Adicione um
+				novo telefone</a> &nbsp;&nbsp;&nbsp;<a href="/Usuarios/list">Liste
+				todos os usuarios</a>&nbsp;&nbsp;&nbsp; <a
+				href="/Usuarios/listTelefones">Lista de telefones</a>
 
 		</h2>
 	</center>
 	<div align="center">
 		<c:if test="${telefone != null}">
-			<form action="update" method="post">
+			<form action="updateTelefone" method="post">
 		</c:if>
 		<c:if test="${telefone == null}">
-			<form action="insert" method="post">
+			<form action="insertTelefone" method="post">
 		</c:if>
 		<table border="1" cellpadding="5">
 			<caption>
