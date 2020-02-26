@@ -13,8 +13,11 @@
 			&nbsp;&nbsp;&nbsp;<a href="/Usuarios/newTelefone">Adicione um
 				novo telefone</a> &nbsp;&nbsp;&nbsp;<a href="/Usuarios/list">Liste
 				todos os usuarios</a>&nbsp;&nbsp;&nbsp; <a
-				href="/Usuarios/listTelefones">Lista de telefones</a>&nbsp;&nbsp;&nbsp;<a href="/Usuarios/login"> Login </a>
-			
+				href="/Usuarios/listTelefones">Lista de telefones</a>&nbsp;&nbsp;&nbsp;<a
+				href="/Usuarios/login"> Login </a>
+				&nbsp;&nbsp;&nbsp;<a
+				href="/Usuarios/searchUsuarios">Buscar usuario </a>
+
 		</h2>
 	</center>
 	<div align="center">
@@ -38,9 +41,8 @@
 						&nbsp;&nbsp;&nbsp;&nbsp; <a
 						href="/Usuarios/delete?id=<c:out value='${usuario.id}' />">Delete</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; <a
-						href="/Usuarios/searchTelefone?id=<c:out value='${usuario.id}' />">Telefones</a></td>
-
-
+						href="/Usuarios/searchTelefone?id=<c:out value='${usuario.id}' />">Telefones</a>
+					</td>
 
 				</tr>
 			</c:forEach>

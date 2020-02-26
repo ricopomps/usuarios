@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import usuario.dao.TelefoneDAO;
 import usuario.dao.UsuarioDAO;
@@ -76,6 +77,9 @@ public class UsuarioControllerServlet extends HttpServlet {
 			case "/searchTelefone":
 				listTelefonesFromUsuario(request, response);
 				break;
+			case "/searchUsuarios":
+				procurarUsuarios(request, response);
+				break;
 			case "/login":
 				login(request, response);
 				break;
@@ -117,6 +121,39 @@ public class UsuarioControllerServlet extends HttpServlet {
 		List<Telefone> listaTelefone = telefoneDAO.listAllTelefones(id);
 		request.setAttribute("listaTelefone", listaTelefone);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("ListaTelefone.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void procurarUsuarios(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		int id;
+		String nome;
+		String email;
+
+		try {
+			id = Integer.parseInt(request.getParameter("id"));
+		} catch (Exception e) {
+			id = 0;
+		}
+		try {
+			nome = request.getParameter("nome");
+			if(nome.equals("")) {
+				throw new Exception() ;
+			}
+		} catch (Exception e) {
+			nome = null;
+		}
+		try {
+			email = request.getParameter("email");
+			if(email.equals("")) {
+				throw new Exception() ;
+			}
+		} catch (Exception e) {
+			email = null;
+		}
+		List<Usuario> listaUsuario = usuarioDAO.listAllUsuarios(id,nome,email);
+		request.setAttribute("listaUsuario", listaUsuario);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("SearchUsuarios.jsp");
 		dispatcher.forward(request, response);
 	}
 

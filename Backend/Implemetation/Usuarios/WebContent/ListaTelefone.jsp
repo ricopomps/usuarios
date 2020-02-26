@@ -36,6 +36,7 @@
 					<td><c:out value="${telefone.numero}" /></td>
 					<td><c:out value="${telefone.tipo}" /></td>
 					<td><c:out value="${telefone.id_usuario}" /></td>
+					
 					<td><a
 						href="/Usuarios/editTelefone?id=<c:out value='${telefone.id}' />">Edit</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; <a

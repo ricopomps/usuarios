@@ -95,6 +95,89 @@ public class UsuarioDAO {
 		return listaUsuarios;
 	}
 
+	public List<Usuario> listAllUsuarios(int id) throws SQLException {
+		List<Usuario> listaUsuarios = new ArrayList<>();
+
+		String sql = "SELECT * FROM usuarios WHERE id=" + id;
+
+		connect();
+
+		Statement statement = jdbcConnection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		while (resultSet.next()) {
+			id = resultSet.getInt("id");
+			String nome = resultSet.getString("nome");
+			String email = resultSet.getString("email");
+//			String senha = resultSet.getString("senha");
+			// Showing the password would result in a security flaw, hence the list wont
+			// return any passwords
+
+			Usuario usuario = new Usuario();
+			usuario.setId(id);
+			usuario.setNome(nome);
+			usuario.setEmail(email);
+			usuario.setSenha(null);
+
+			listaUsuarios.add(usuario);
+
+		}
+		resultSet.close();
+		statement.close();
+
+		disconnect();
+
+		return listaUsuarios;
+	}
+
+	public List<Usuario> listAllUsuarios(int id, String nome, String email) throws SQLException {
+		String sql = "SELECT * FROM usuarios ";
+		if (id != 0 && id > 0) {
+			sql += "WHERE id = " + id;
+		}
+		if (nome != null) {
+			if (id != 0 && id > 0) {
+				sql += " AND nome LIKE '%" + nome + "%'";
+			} else {
+
+				sql += "WHERE nome LIKE '%" + nome + "%'";
+			}
+		}
+		if (email != null) {
+			sql += id != 0 && id > 0 ? " AND email LIKE '%" + email + "%'"	: nome != null ? " AND email LIKE '%" + email + "%'" : "WHERE email LIKE '%" + email + "%'";
+		}
+
+		List<Usuario> listaUsuarios = new ArrayList<>();
+		connect();
+
+		Statement statement = jdbcConnection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		while (resultSet.next()) {
+			id = resultSet.getInt("id");
+			nome = resultSet.getString("nome");
+			email = resultSet.getString("email");
+//			String senha = resultSet.getString("senha");
+			// Showing the password would result in a security flaw, hence the list wont
+			// return any passwords
+
+			Usuario usuario = new Usuario();
+			usuario.setId(id);
+			usuario.setNome(nome);
+			usuario.setEmail(email);
+			usuario.setSenha(null);
+
+			listaUsuarios.add(usuario);
+
+		}
+		resultSet.close();
+		statement.close();
+
+		disconnect();
+
+		return listaUsuarios;
+	}
+
 	public boolean deleteUsuario(Usuario usuario) throws SQLException {
 		String sql = "DELETE FROM usuarios WHERE id = ?";
 
