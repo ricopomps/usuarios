@@ -80,6 +80,9 @@ public class UsuarioControllerServlet extends HttpServlet {
 			case "/searchUsuarios":
 				procurarUsuarios(request, response);
 				break;
+			case "/searchTelefones":
+				procurarTelefones(request, response);
+				break;
 			case "/login":
 				login(request, response);
 				break;
@@ -137,23 +140,69 @@ public class UsuarioControllerServlet extends HttpServlet {
 		}
 		try {
 			nome = request.getParameter("nome");
-			if(nome.equals("")) {
-				throw new Exception() ;
+			if (nome.equals("")) {
+				throw new Exception();
 			}
 		} catch (Exception e) {
 			nome = null;
 		}
 		try {
 			email = request.getParameter("email");
-			if(email.equals("")) {
-				throw new Exception() ;
+			if (email.equals("")) {
+				throw new Exception();
 			}
 		} catch (Exception e) {
 			email = null;
 		}
-		List<Usuario> listaUsuario = usuarioDAO.listAllUsuarios(id,nome,email);
+		List<Usuario> listaUsuario = usuarioDAO.listAllUsuarios(id, nome, email);
 		request.setAttribute("listaUsuario", listaUsuario);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("SearchUsuarios.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void procurarTelefones(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		int id;
+		int ddd;
+		String numero;
+		String tipo;
+		int id_usuario;
+
+		try {
+			id = Integer.parseInt(request.getParameter("id"));
+		} catch (Exception e) {
+			id = 0;
+		}
+		try {
+			ddd = Integer.parseInt(request.getParameter("ddd"));
+
+		} catch (Exception e) {
+			ddd = 0;
+		}
+		try {
+			numero = request.getParameter("numero");
+			if (numero.equals("")) {
+				throw new Exception();
+			}
+		} catch (Exception e) {
+			numero = null;
+		}
+		try {
+			tipo = request.getParameter("tipo");
+			if (tipo.equals("")) {
+				throw new Exception();
+			}
+		} catch (Exception e) {
+			tipo = null;
+		}
+		try {
+			id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
+		} catch (Exception e) {
+			id_usuario = 0;
+		}
+		List<Telefone> listaTelefone = telefoneDAO.listAllTelefones(id, ddd, numero, tipo, id_usuario);
+		request.setAttribute("listaTelefone", listaTelefone);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("SearchTelefones.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -171,7 +220,10 @@ public class UsuarioControllerServlet extends HttpServlet {
 		if (usuario != null) {
 			if (usuario.getNome().equals(nome) && usuario.getEmail().equals(email)
 					&& usuario.getSenha().equals(senha)) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("LoginComSucesso.jsp");
+				request.setAttribute("usuario", usuario);
+				List<Telefone> listaTelefone = telefoneDAO.listAllTelefonesIdUsuario(usuario.getId());
+				request.setAttribute("listaTelefone", listaTelefone);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("Logado.jsp");
 				dispatcher.forward(request, response);
 			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("LoginComFracasso.jsp");

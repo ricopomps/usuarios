@@ -131,6 +131,100 @@ public class TelefoneDAO {
 		return listaTelefones;
 	}
 
+	public List<Telefone> listAllTelefones(int id, int ddd, String numero, String tipo, int id_usuario)
+			throws SQLException {
+		List<Telefone> listaTelefones = new ArrayList<>();
+		String sql = "SELECT * FROM telefones ";
+		connect();
+		boolean hasPrevious = false;
+		if (id > 0) {
+			sql += "WHERE id = " + id;
+			hasPrevious = true;
+		}
+		if (ddd > 0) {
+			if (hasPrevious) {
+				sql += " AND ddd = " + ddd;
+			} else {
+				sql += "WHERE ddd = " + ddd;
+				hasPrevious = true;
+			}
+		}
+		if (numero != null) {
+			sql += hasPrevious ? " AND numero = '" + numero + "'" : "WHERE numero = '" + numero + "'";
+			hasPrevious = true;
+		}
+		if (tipo != null) {
+			sql += hasPrevious ? " AND tipo = '" + tipo + "'" : "WHERE tipo = '" + tipo + "'";
+			hasPrevious = true;
+		}
+		if (id_usuario > 0) {
+			sql += hasPrevious ? " AND id_usuario = " + id_usuario : "WHERE id_usuario = " + id_usuario;
+		}
+
+		Statement statement = jdbcConnection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		while (resultSet.next()) {
+			id = resultSet.getInt("id");
+			ddd = resultSet.getInt("ddd");
+			numero = resultSet.getString("numero");
+			tipo = resultSet.getString("tipo");
+			id_usuario = resultSet.getInt("id_usuario");
+
+			Telefone telefone = new Telefone();
+			telefone.setId(id);
+			telefone.setDdd(ddd);
+			telefone.setNumero(numero);
+			telefone.setTipo(tipo);
+			telefone.setId_usuario(id_usuario);
+
+			listaTelefones.add(telefone);
+
+		}
+		resultSet.close();
+		statement.close();
+
+		disconnect();
+
+		return listaTelefones;
+	}
+
+	public List<Telefone> listAllTelefonesIdUsuario(int id_usuario) throws SQLException {
+		List<Telefone> listaTelefones = new ArrayList<>();
+
+		String sql = "SELECT * FROM telefones WHERE id_usuario = " + id_usuario;
+
+		connect();
+
+		Statement statement = jdbcConnection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		while (resultSet.next()) {
+			int id = resultSet.getInt("id");
+			int ddd = resultSet.getInt("ddd");
+			String numero = resultSet.getString("numero");
+			String tipo = resultSet.getString("tipo");
+			id_usuario = resultSet.getInt("id_usuario");
+
+			Telefone telefone = new Telefone();
+			telefone.setId(id);
+			telefone.setDdd(ddd);
+			telefone.setNumero(numero);
+			telefone.setTipo(tipo);
+			telefone.setId_usuario(id_usuario);
+
+			listaTelefones.add(telefone);
+
+		}
+		resultSet.close();
+		statement.close();
+
+		disconnect();
+
+		return listaTelefones;
+
+	}
+
 	public boolean deleteTelefone(Telefone telefone) throws SQLException {
 		String sql = "DELETE FROM telefones WHERE id = ?";
 

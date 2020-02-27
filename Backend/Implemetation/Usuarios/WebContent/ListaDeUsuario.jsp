@@ -7,24 +7,38 @@
 </head>
 <body>
 	<center>
-		<h1>Gerenciador de usuarios</h1>
-		<h2>
-			<a href="/Usuarios/new">Adicione um novo usuario</a>
-			&nbsp;&nbsp;&nbsp;<a href="/Usuarios/newTelefone">Adicione um
-				novo telefone</a> &nbsp;&nbsp;&nbsp;<a href="/Usuarios/list">Liste
-				todos os usuarios</a>&nbsp;&nbsp;&nbsp; <a
-				href="/Usuarios/listTelefones">Lista de telefones</a>&nbsp;&nbsp;&nbsp;<a
-				href="/Usuarios/login"> Login </a>
-				&nbsp;&nbsp;&nbsp;<a
-				href="/Usuarios/searchUsuarios">Buscar usuario </a>
 
+		<table border="3" cellpadding="20">
+			<tr>
+				<th>
+					<h1>Gerenciador de usuarios</h1>
+				</th>
+			</tr>
+		</table>
+		<h2>
+			<table border="3" cellpadding="20">
+				<tr>
+
+					<th><a href="/Usuarios/new">Adicione um novo usuario</a></th>
+					<th><a href="/Usuarios/newTelefone">Adicione um novo
+							telefone</a></th>
+					<th><a href="/Usuarios/list">Liste todos os usuarios</a></th>
+					<th><a href="/Usuarios/listTelefones">Lista de telefones</a></th>
+					<th><a href="/Usuarios/login"> Login </a></th>
+					<th><a href="/Usuarios/searchUsuarios">Buscar usuario </a></th>
+					<th><a href="/Usuarios/searchTelefones">Buscar telefone </a></th>
+				</tr>
+			</table>
 		</h2>
 	</center>
 	<div align="center">
+
+		<h2>Lista de usuarios</h2>
+
+		&nbsp;&nbsp;&nbsp;&nbsp;
+
 		<table border="1" cellpadding="5">
-			<caption>
-				<h2>Lista de usuarios</h2>
-			</caption>
+
 			<tr>
 				<th>ID</th>
 				<th>Nome</th>

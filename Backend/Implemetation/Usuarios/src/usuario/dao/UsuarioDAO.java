@@ -132,7 +132,7 @@ public class UsuarioDAO {
 
 	public List<Usuario> listAllUsuarios(int id, String nome, String email) throws SQLException {
 		String sql = "SELECT * FROM usuarios ";
-		if (id != 0 && id > 0) {
+		if (id > 0) {
 			sql += "WHERE id = " + id;
 		}
 		if (nome != null) {
@@ -144,7 +144,8 @@ public class UsuarioDAO {
 			}
 		}
 		if (email != null) {
-			sql += id != 0 && id > 0 ? " AND email LIKE '%" + email + "%'"	: nome != null ? " AND email LIKE '%" + email + "%'" : "WHERE email LIKE '%" + email + "%'";
+			sql += id > 0 ? " AND email LIKE '%" + email + "%'"
+					: nome != null ? " AND email LIKE '%" + email + "%'" : "WHERE email LIKE '%" + email + "%'";
 		}
 
 		List<Usuario> listaUsuarios = new ArrayList<>();

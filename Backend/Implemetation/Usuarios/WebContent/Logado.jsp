@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<title>Banco de telefones</title>
+<title>Banco de usuarios</title>
 </head>
 <body>
 	<center>
@@ -32,18 +32,39 @@
 		</h2>
 	</center>
 	<div align="center">
+
+		<h2>
+			Bem vindo
+			<c:out value='${usuario.nome}' />
+		</h2>
+
+		&nbsp;&nbsp;&nbsp;&nbsp;
+
 		<table border="1" cellpadding="5">
-			<caption>
-				<h2>Lista de telefones</h2>
-			</caption>
-			
+
 			<tr>
 				<th>ID</th>
-				<th>Ddd</th>
-				<th>Numero</th>
-				<th>Tipo</th>
-				<th>Id_usuario</th>
+				<th>Nome</th>
+				<th>Email</th>
+				<th>Ações</th>
 			</tr>
+			<tr>
+				<td><c:out value="${usuario.id}" /></td>
+				<td><c:out value="${usuario.nome}" /></td>
+				<td><c:out value="${usuario.email}" /></td>
+				<td><a href="/Usuarios/edit?id=<c:out value='${usuario.id}' />">Edit</a>
+					&nbsp;&nbsp;&nbsp;&nbsp; <a
+					href="/Usuarios/delete?id=<c:out value='${usuario.id}' />">Delete</a>
+				</td>
+
+			</tr>
+		</table>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+
+		<h3>Telefones</h3>
+
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<table border="1" cellpadding="5">
 			<c:forEach var="telefone" items="${listaTelefone}">
 				<tr>
 					<td><c:out value="${telefone.id}" /></td>
@@ -51,7 +72,7 @@
 					<td><c:out value="${telefone.numero}" /></td>
 					<td><c:out value="${telefone.tipo}" /></td>
 					<td><c:out value="${telefone.id_usuario}" /></td>
-					
+
 					<td><a
 						href="/Usuarios/editTelefone?id=<c:out value='${telefone.id}' />">Edit</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; <a

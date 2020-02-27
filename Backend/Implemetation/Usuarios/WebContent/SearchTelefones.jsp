@@ -32,29 +32,39 @@
 		</h2>
 	</center>
 	<div align="center">
-		<form action="searchUsuarios" method="post">
+		<form action="searchTelefones" method="post">
 			&nbsp;&nbsp;&nbsp;
 
 			<caption>
-					<h2>Buscar usuarios</h2>
-				</caption>
-		
+				<h2>Buscar telefones</h2>
+			</caption>
+
 			<table border="1" cellpadding="5">
 
-				<tr>
+					<tr>
 					<th>Id:</th>
 					<td><input type="text" name="id" size="45"
-						value="<c:out value='${usuario.id}' />" /></td>
+						value="<c:out value='${telefone.id}' />" /></td>
 				</tr>
 				<tr>
-					<th>Nome:</th>
-					<td><input type="text" name="nome" size="45"
-						value="<c:out value='${usuario.nome}' />" /></td>
+					<th>Ddd:</th>
+					<td><input type="text" name="ddd" size="45"
+						value="<c:out value='${telefone.ddd}' />" /></td>
 				</tr>
 				<tr>
-					<th>Email:</th>
-					<td><input type="text" name="email" size="45"
-						value="<c:out value='${usuario.email}' />" /></td>
+					<th>Numero:</th>
+					<td><input type="text" name="numero" size="45"
+						value="<c:out value='${telefone.numero}' />" /></td>
+				</tr>
+				<tr>
+					<th>Tipo:</th>
+					<td><input type="text" name="tipo" size="45"
+						value="<c:out value='${telefone.tipo}' />" /></td>
+				</tr>
+				<tr>
+					<th>Id_usuario:</th>
+					<td><input type="text" name="id_usuario" size="45"
+						value="<c:out value='${telefone.id_usuario}' />" /></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input type="submit"
@@ -72,23 +82,24 @@
 
 				<tr>
 					<th>ID</th>
-					<th>Nome</th>
-					<th>Email</th>
+					<th>DDD</th>
+					<th>Numero</th>
+					<th>Tipo</th>
+					<th>Id_usuario</th>
 					<th>Ações</th>
 				</tr>
-				<c:forEach var="usuario" items="${listaUsuario}">
+				<c:forEach var="telefone" items="${listaTelefone}">
 					<tr>
-						<td><c:out value="${usuario.id}" /></td>
-						<td><c:out value="${usuario.nome}" /></td>
-						<td><c:out value="${usuario.email}" /></td>
-						<td><a
-							href="/Usuarios/edit?id=<c:out value='${usuario.id}' />">Edit</a>
-							&nbsp;&nbsp;&nbsp;&nbsp; <a
-							href="/Usuarios/delete?id=<c:out value='${usuario.id}' />">Delete</a>
-							&nbsp;&nbsp;&nbsp;&nbsp; <a
-							href="/Usuarios/searchTelefone?id=<c:out value='${usuario.id}' />">Telefones</a>
-						</td>
+						<td><c:out value="${telefone.id}" /></td>
+						<td><c:out value="${telefone.ddd}" /></td>
+						<td><c:out value="${telefone.numero}" /></td>
+						<td><c:out value="${telefone.tipo}" /></td>
+						<td><c:out value="${telefone.id_usuario}" /></td>
 
+						<td><a
+							href="/Usuarios/editTelefone?id=<c:out value='${telefone.id}' />">Edit</a>
+							&nbsp;&nbsp;&nbsp;&nbsp; <a
+							href="/Usuarios/deleteTelefone?id=<c:out value='${telefone.id}' />">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</table>

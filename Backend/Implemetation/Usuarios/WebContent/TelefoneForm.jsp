@@ -7,14 +7,28 @@
 </head>
 <body>
 	<center>
-		<h1>Gerenciador de telefones</h1>
-		<h2>
-				<a href="/Usuarios/new">Adicione um novo usuario</a>
-			&nbsp;&nbsp;&nbsp;<a href="/Usuarios/newTelefone">Adicione um
-				novo telefone</a> &nbsp;&nbsp;&nbsp;<a href="/Usuarios/list">Liste
-				todos os usuarios</a>&nbsp;&nbsp;&nbsp; <a
-				href="/Usuarios/listTelefones">Lista de telefones</a>
 
+		<table border="3" cellpadding="20">
+			<tr>
+				<th>
+					<h1>Gerenciador de usuarios</h1>
+				</th>
+			</tr>
+		</table>
+		<h2>
+			<table border="3" cellpadding="20">
+				<tr>
+
+					<th><a href="/Usuarios/new">Adicione um novo usuario</a></th>
+					<th><a href="/Usuarios/newTelefone">Adicione um novo
+							telefone</a></th>
+					<th><a href="/Usuarios/list">Liste todos os usuarios</a></th>
+					<th><a href="/Usuarios/listTelefones">Lista de telefones</a></th>
+					<th><a href="/Usuarios/login"> Login </a></th>
+					<th><a href="/Usuarios/searchUsuarios">Buscar usuario </a></th>
+					<th><a href="/Usuarios/searchTelefones">Buscar telefone </a></th>
+				</tr>
+			</table>
 		</h2>
 	</center>
 	<div align="center">
