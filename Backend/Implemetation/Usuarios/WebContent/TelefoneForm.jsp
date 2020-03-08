@@ -71,8 +71,7 @@
 			<tr>
 				<th>Id_usuario:</th>
 				<td><input type="text" name="id_usuario" size="45"
-					value="<c:out value='${telefone.id_usuario}' />" />
-				</td>
+					value="<c:out value='${telefone.id_usuario}' />" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"
@@ -80,6 +79,7 @@
 			</tr>
 		</table>
 		</form>
+		<button type="button" name="back" onclick="history.back()">back</button>
 	</div>
 </body>
 </html>

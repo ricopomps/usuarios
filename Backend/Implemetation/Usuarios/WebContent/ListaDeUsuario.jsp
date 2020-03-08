@@ -56,6 +56,8 @@
 						href="/Usuarios/delete?id=<c:out value='${usuario.id}' />">Delete</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; <a
 						href="/Usuarios/searchTelefone?id=<c:out value='${usuario.id}' />">Telefones</a>
+						&nbsp;&nbsp;&nbsp;&nbsp; <a
+						href="/Usuarios/newTelefoneComId?id=<c:out value='${usuario.id}' />">Novo telefone</a>
 					</td>
 
 				</tr>

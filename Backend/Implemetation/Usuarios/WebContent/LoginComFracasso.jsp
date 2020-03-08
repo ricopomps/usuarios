@@ -38,7 +38,8 @@
 		
 		<table border="1" cellpadding="5">
 			<caption>
-				<h2>LOGIN COM FRACASSO</h2>
+				<h2>NÃO FOI POSSIVEL FAZER O LOGIN</h2>
+				<h3>Nome, email ou senha estão incorretos</h3>
 			</caption>
 			
 			<tr>

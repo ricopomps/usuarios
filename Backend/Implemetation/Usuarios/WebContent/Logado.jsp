@@ -35,7 +35,7 @@
 
 		<h2>
 			Bem vindo
-			<c:out value='${usuario.nome}' />
+			<c:out value='${nome}' />
 		</h2>
 
 		&nbsp;&nbsp;&nbsp;&nbsp;
@@ -49,12 +49,12 @@
 				<th>Ações</th>
 			</tr>
 			<tr>
-				<td><c:out value="${usuario.id}" /></td>
-				<td><c:out value="${usuario.nome}" /></td>
-				<td><c:out value="${usuario.email}" /></td>
-				<td><a href="/Usuarios/edit?id=<c:out value='${usuario.id}' />">Edit</a>
+				<td><c:out value="${id}" /></td>
+				<td><c:out value="${nome}" /></td>
+				<td><c:out value="${email}" /></td>
+				<td><a href="/Usuarios/edit?id=<c:out value='${id}' />">Edit</a>
 					&nbsp;&nbsp;&nbsp;&nbsp; <a
-					href="/Usuarios/delete?id=<c:out value='${usuario.id}' />">Delete</a>
+					href="/Usuarios/delete?id=<c:out value='${id}' />">Delete</a>
 				</td>
 
 			</tr>
@@ -63,6 +63,14 @@
 
 		<h3>Telefones</h3>
 
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<table border="1" cellpadding="5">
+			<tr>
+				<td><a
+					href="/Usuarios/newTelefoneComId?id=<c:out value='${id}' />">Novo
+						telefone</a></td>
+			</tr>
+		</table>
 		&nbsp;&nbsp;&nbsp;&nbsp;
 		<table border="1" cellpadding="5">
 			<c:forEach var="telefone" items="${listaTelefone}">
@@ -77,6 +85,7 @@
 						href="/Usuarios/editTelefone?id=<c:out value='${telefone.id}' />">Edit</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; <a
 						href="/Usuarios/deleteTelefone?id=<c:out value='${telefone.id}' />">Delete</a></td>
+
 				</tr>
 			</c:forEach>
 		</table>

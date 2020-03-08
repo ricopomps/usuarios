@@ -136,7 +136,7 @@ public class UsuarioDAO {
 			sql += "WHERE id = " + id;
 		}
 		if (nome != null) {
-			if (id != 0 && id > 0) {
+			if (id > 0) {
 				sql += " AND nome LIKE '%" + nome + "%'";
 			} else {
 
@@ -208,39 +208,6 @@ public class UsuarioDAO {
 		disconnect();
 		return updated;
 	}
-
-//	public boolean getUsuario(String nome, String email, String senha) throws SQLException {
-//		boolean loginComSucesso = false;
-//		Usuario usuario = null;
-//		String sql = "SELECT * FROM usuarios WHERE nome = ? and email = ? and senha = ?";
-//		connect();
-//		PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-//		statement.setString(1, nome);
-//		statement.setString(2, email);
-//		statement.setString(3, senha);
-//		ResultSet resultSet = statement.executeQuery();
-//
-//		if (resultSet.next()) {
-//			String nomeDb = resultSet.getString("nome");
-//			String emailDb = resultSet.getString("email");
-//			String senhaDb = resultSet.getString("senha");
-//
-//			if (nomeDb == nome && emailDb == email && senhaDb == senha) {
-//				loginComSucesso = true;
-//			}
-//
-//			usuario = new Usuario();
-//			usuario.setNome(nome);
-//			usuario.setEmail(email);
-//			usuario.setSenha(senha);
-//
-//		}
-//		resultSet.close();
-//		statement.close();
-//		disconnect();
-//
-//		return loginComSucesso;
-//	}
 
 	public Usuario getUsuario(String nome, String email, String senha) throws SQLException {
 		Usuario usuario = null;

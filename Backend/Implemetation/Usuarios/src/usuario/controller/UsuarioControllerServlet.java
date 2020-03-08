@@ -41,11 +41,17 @@ public class UsuarioControllerServlet extends HttpServlet {
 
 		try {
 			switch (action) {
+			case "/":
+				login(request, response);
+				break;
 			case "/new":
 				showNewForm(request, response);
 				break;
 			case "/newTelefone":
 				showNewTelefoneForm(request, response);
+				break;
+			case "/newTelefoneComId":
+				showTelefoneEditFormComId(request, response);
 				break;
 			case "/insert":
 				insertUsuario(request, response);
@@ -167,7 +173,6 @@ public class UsuarioControllerServlet extends HttpServlet {
 		String numero;
 		String tipo;
 		int id_usuario;
-
 		try {
 			id = Integer.parseInt(request.getParameter("id"));
 		} catch (Exception e) {
@@ -213,6 +218,7 @@ public class UsuarioControllerServlet extends HttpServlet {
 
 	private void loginExecute(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+		HttpSession session = request.getSession();
 		String nome = request.getParameter("nome");
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
@@ -220,9 +226,14 @@ public class UsuarioControllerServlet extends HttpServlet {
 		if (usuario != null) {
 			if (usuario.getNome().equals(nome) && usuario.getEmail().equals(email)
 					&& usuario.getSenha().equals(senha)) {
-				request.setAttribute("usuario", usuario);
+//				request.setAttribute("usuario", usuario);
+				int id = usuario.getId();
 				List<Telefone> listaTelefone = telefoneDAO.listAllTelefonesIdUsuario(usuario.getId());
 				request.setAttribute("listaTelefone", listaTelefone);
+				session.setAttribute("id", id);
+				session.setAttribute("nome", nome);
+				session.setAttribute("email", email);
+				session.setAttribute("senha", senha);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("Logado.jsp");
 				dispatcher.forward(request, response);
 			} else {
@@ -265,6 +276,16 @@ public class UsuarioControllerServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	private void showTelefoneEditFormComId(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		Telefone telefone = new Telefone();
+		telefone.setId_usuario(id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("NewTelefoneComId.jsp");
+		request.setAttribute("telefone", telefone);
+		dispatcher.forward(request, response);
+	}
+
 	private void insertUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 		String nome = request.getParameter("nome");
@@ -290,7 +311,8 @@ public class UsuarioControllerServlet extends HttpServlet {
 		novoTelefone.setTipo(tipo);
 		novoTelefone.setId_usuario(id_usuario);
 		telefoneDAO.insertTelefone(novoTelefone);
-		response.sendRedirect("list");
+
+		response.sendRedirect("listTelefones");
 	}
 
 	private void updateUsuario(HttpServletRequest request, HttpServletResponse response)
@@ -322,7 +344,7 @@ public class UsuarioControllerServlet extends HttpServlet {
 		telefone.setTipo(tipo);
 		telefone.setId_usuario(id_usuario);
 		telefoneDAO.updateTelefone(telefone);
-		response.sendRedirect("list");
+		response.sendRedirect("listTelefones");
 	}
 
 	private void deleteUsuario(HttpServletRequest request, HttpServletResponse response)
@@ -340,7 +362,7 @@ public class UsuarioControllerServlet extends HttpServlet {
 		Telefone telefone = new Telefone();
 		telefone.setId(id);
 		telefoneDAO.deleteTelefone(telefone);
-		response.sendRedirect("list");
+		response.sendRedirect("listTelefones");
 	}
 
 }
